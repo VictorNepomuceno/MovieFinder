@@ -1,4 +1,5 @@
 // http://www.omdbapi.com/?i=tt3896198&apikey=2a2b10e0 API KEY
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.movieFinder');
     const input = document.querySelector('.movieName');
@@ -57,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btn?.addEventListener('click', handleForm);
     form?.addEventListener('submit', preventForm);
 });
-
 // interface Cursos {
 //     nome: string;
 //     horas: number;
