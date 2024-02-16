@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #363945;
+    font-family: 'Poppins', sans-serif;
+}
+
+.formContainer {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(100px);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    height: max-content;
+    padding: 2rem;
+    border-radius: 30px;
+}
+
+.movieFinder {
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+    width: 100%;
+    gap: 3rem;
+}
+
+.movieName {
+    background-color: #363945;
+    border: none;
+    text-align: start;
+    padding: 0 1rem;
+    border-radius: 15px;
+    outline: none;
+    font-size: 1.2rem;
+    color: #fff;
+    transition: 0.3s all ease;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.movieName::placeholder {
+    color: #fff;
+    opacity: 0.7;
+}
+
+.movieName:focus {
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.btn {
+    border: none;
+    background-color: #363945;
+    color: #ffff;
+    padding: 1.2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.btn:hover {
+    transform: scale(1.03);
+}
+
+.results p {
+    display: block;
+    font-size: 5rem;
+    color: #fff;
+}
