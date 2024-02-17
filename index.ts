@@ -1,99 +1,78 @@
-// http://www.omdbapi.com/?i=tt3896198&apikey=2a2b10e0 API KEY
-
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('.movieFinder');
-    const input = document.querySelector('.movieName');
+    const input = document.querySelector('.movieName') as HTMLInputElement;
     const btn = document.querySelector('.btn');
-    const results = document.querySelector('.results');
+    const result = document.querySelector('.result');
 
-    interface Movies {
+    interface Filmes {
         Title: string;
-        Poster: string;
+        Year: string;
+        Rated: string;
+        Released: string;
+        Runtime: string;
         Genre: string;
         Director: string;
-        Response: boolean;
+        Writer: string;
+        Actors: string;
+        Plot: string;
+        Language: string;
+        Awards: string;
+        Poster: string;
+        imdbRating: string;
+        Ratings: { Source: string; Value: string }[];
+        Response: 'True' | 'False';
+        Error?: string;
     }
 
-    async function fetchMovie(movieName: string) {
-        let key = '2a2b10e0';
-        let url = `http://www.omdbapi.com/?i=${movieName}&apikey=${key}`;
+    async function fetchMovie() {
+        let movieName = input.value;
+        let url = `https://www.omdbapi.com/?t=${movieName}&apikey=2a2b10e0`;
         const response = await fetch(url);
         const data = await response.json();
-        handleJson(data);
+        console.log(data);
+        return handleJson(data);
     }
 
-    function isMovie(value: unknown): value is Movies {
-        if (
-            value &&
-            typeof value === 'object' &&
-            'Title' in value &&
-            'Poster' in value &&
-            'Genre' in value &&
-            'Director' in value &&
-            'Response' in value
-        ) {
-            return true;
-        } else return false;
-    }
-
-    function handleJson(data: unknown) {
-        if (isMovie(data)) {
-            if (data.Response === true && results) {
-                results.innerHTML = `<h1>${data.Title}</h1>`;
-            } else if (results) {
-                results.innerHTML = '<h1>Not found</h1>';
-            }
+    function handleJson(data: Filmes) {
+        let movieName = input.value;
+        if (result) {
+            if (data.Response === 'True') {
+                result.innerHTML = `               
+                
+                <div class="containerResult">
+                        <img src="${data.Poster}" alt="filme" />
+                        <div class="resultContent">
+                            <h2 class="title">${data.Title}</h2>
+                            <div class="rating">
+                                <img src="./star-icon.svg" alt="" />
+                                <h4>${data.imdbRating}</h4>
+                            </div>
+                            <div class="details">
+                                <span>${data.Rated}</span>
+                                <span>${data.Year}</span>
+                                <span>${data.Runtime}</span>
+                            </div>
+                            <div class="genre">
+                                <div>${data.Genre.split(',').join('</div><div>')}</div>
+                            </div>
+                        </div>
+                </div>
+                <h3>Plot:</h3>  
+                <p>${data.Plot}</p>
+                <h3>Cast:</h3>
+                <p>${data.Actors}</p>
+            `;
+            } else if (movieName.length <= 0) {
+                result.innerHTML = `<p>Please, enter a movie!</p>`;
+            } else result.innerHTML = `<p>${data.Error}</p>`;
         }
     }
 
-    function handleForm() {
-        const movieName = (input as HTMLInputElement).value;
-        fetchMovie(movieName);
-    }
-
-    function preventForm(e: Event) {
+    function handleSubmit(e: Event) {
         e.preventDefault();
+        fetchMovie();
     }
 
-    btn?.addEventListener('click', handleForm);
-    form?.addEventListener('submit', preventForm);
+    btn?.addEventListener('submit', handleSubmit);
+    form?.addEventListener('submit', handleSubmit);
 });
-// interface Cursos {
-//     nome: string;
-//     horas: number;
-//     tags: string[];
-// }
-
-// function isCursos(value: unknown): value is Cursos {
-//     if (
-//         value &&
-//         typeof value === 'object' &&
-//         'nome' in value &&
-//         'horas' in value &&
-//         'tags' in value
-//     ) {
-//         return true;
-//     } else return false;
-// }
-
-// async function fetchCurso() {
-//     const response = await fetch('https://api.origamid.dev/json/cursos.json');
-//     const data = await response.json();
-//     handleJson(data);
-// }
-
-// fetchCurso();
-
-// function handleJson(data: unknown) {
-//     if (Array.isArray(data)) {
-//         data.filter(isCursos).forEach((item) => {
-//             document.body.innerHTML += `
-
-//             <h1>${item.nome}</h1>
-//             <h1>${item.horas} HRS</h1>
-//             <h1>${item.tags.join(', ')}</h1>
-
-//             `;
-//         });
-//     }
-// }
