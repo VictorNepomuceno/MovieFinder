@@ -162,3 +162,13 @@ p {
     font-weight: 300;
     text-align: justify;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    color: #fff;
+}
+
+footer a {
+    color: #fb1;
+}
