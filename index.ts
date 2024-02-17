@@ -37,10 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let movieName = input.value;
         if (result) {
             if (data.Response === 'True') {
+                result.classList.add('active');
                 result.innerHTML = `               
                 
                 <div class="containerResult">
-                        <img src="${data.Poster}" alt="filme" />
+                        <img class="poster" src="${data.Poster}" alt="filme" />
                         <div class="resultContent">
                             <h2 class="title">${data.Title}</h2>
                             <div class="rating">
@@ -63,8 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>${data.Actors}</p>
             `;
             } else if (movieName.length <= 0) {
-                result.innerHTML = `<p>Please, enter a movie!</p>`;
-            } else result.innerHTML = `<p>${data.Error}</p>`;
+                result.classList.add('active');
+                result.innerHTML = `<p class="msg">Please, enter a movie!</p>`;
+            } else result.innerHTML = `<p class="msg">${data.Error}</p>`;
         }
     }
 

@@ -63,13 +63,15 @@ document.addEventListener('DOMContentLoaded', function () {
         var movieName = input.value;
         if (result) {
             if (data.Response === 'True') {
-                result.innerHTML = "               \n                \n                <div class=\"containerResult\">\n                        <img src=\"".concat(data.Poster, "\" alt=\"filme\" />\n                        <div class=\"resultContent\">\n                            <h2 class=\"title\">").concat(data.Title, "</h2>\n                            <div class=\"rating\">\n                                <img src=\"./star-icon.svg\" alt=\"\" />\n                                <h4>").concat(data.imdbRating, "</h4>\n                            </div>\n                            <div class=\"details\">\n                                <span>").concat(data.Rated, "</span>\n                                <span>").concat(data.Year, "</span>\n                                <span>").concat(data.Runtime, "</span>\n                            </div>\n                            <div class=\"genre\">\n                                <div>").concat(data.Genre.split(',').join('</div><div>'), "</div>\n                            </div>\n                        </div>\n                </div>\n                <h3>Plot:</h3>  \n                <p>").concat(data.Plot, "</p>\n                <h3>Cast:</h3>\n                <p>").concat(data.Actors, "</p>\n            ");
+                result.classList.add('active');
+                result.innerHTML = "               \n                \n                <div class=\"containerResult\">\n                        <img class=\"poster\" src=\"".concat(data.Poster, "\" alt=\"filme\" />\n                        <div class=\"resultContent\">\n                            <h2 class=\"title\">").concat(data.Title, "</h2>\n                            <div class=\"rating\">\n                                <img src=\"./star-icon.svg\" alt=\"\" />\n                                <h4>").concat(data.imdbRating, "</h4>\n                            </div>\n                            <div class=\"details\">\n                                <span>").concat(data.Rated, "</span>\n                                <span>").concat(data.Year, "</span>\n                                <span>").concat(data.Runtime, "</span>\n                            </div>\n                            <div class=\"genre\">\n                                <div>").concat(data.Genre.split(',').join('</div><div>'), "</div>\n                            </div>\n                        </div>\n                </div>\n                <h3>Plot:</h3>  \n                <p>").concat(data.Plot, "</p>\n                <h3>Cast:</h3>\n                <p>").concat(data.Actors, "</p>\n            ");
             }
             else if (movieName.length <= 0) {
-                result.innerHTML = "<p>Please, enter a movie!</p>";
+                result.classList.add('active');
+                result.innerHTML = "<p class=\"msg\">Please, enter a movie!</p>";
             }
             else
-                result.innerHTML = "<p>".concat(data.Error, "</p>");
+                result.innerHTML = "<p class=\"msg\">".concat(data.Error, "</p>");
         }
     }
     function handleSubmit(e) {
